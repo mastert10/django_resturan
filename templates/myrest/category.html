@@ -1,0 +1,42 @@
+{% extends 'myrest/base.html' %}
+
+{% block content %}
+<!-- Start All Pages -->
+	<div class="all-page-title page-breadcrumb">
+		<div class="container text-center">
+			<div class="row">
+				<div class="col-lg-12">
+					<h1></h1>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End All Pages -->
+	
+	<!-- Start category -->
+	<div class="gallery-box">
+		<div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="heading-title text-center">
+                        <h2>دسته بندی : {{categories.title}}</h2>
+					</div>
+				</div>
+			</div>
+			<div class="tz-gallery">
+                <div class="row">
+                    {% for cat in categories.foods.all %}
+					<div class="col-sm-12 col-md-4 col-lg-4">
+                        <h2 style='text-align:center'>{{cat.name}}</h2>
+						<a class="lightbox" href="{% url 'foods:detail' cat.id %}">
+							<img class="img-fluid" src="{{cat.thumbnail.url}}" alt="Gallery Images">
+						</a>
+					</div>
+                    {% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End category -->
+{% endblock %}
+

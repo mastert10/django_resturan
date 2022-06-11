@@ -1,0 +1,29 @@
+@import url('https://v1.fontapi.ir/css/Sahel');
+
+body {
+    direction: rtl;
+    text-align:right;
+    font-family: Sahel !important;
+}
+
+.myfont{
+    font-family: Sahel !important;
+}
+
+.mdl-data-table__cell--non-numeric.mdl-data-table__cell--non-numeric {
+    text-align: right;
+}
+
+.mdl-card__supporting-text {
+    color: rgba(255,255,255,1);
+    font-size: 1rem;
+    padding: 0px 5px;
+  }
+  
+.mdl-data-table {
+    font-weight: bold !important;
+}
+
+.mdl-cell.mdl-cell--3-col-desktop.mdl-cell--10-col-tablet.mdl-cell--2-col-phone.buttons-basic {
+    text-align: right;
+}

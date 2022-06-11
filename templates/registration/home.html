@@ -1,0 +1,120 @@
+{% extends 'registration/base.html' %}
+{% load ratings %}
+
+{% block title %}صفحه اصلی{% endblock %}
+
+{% block main %}
+<main class="mdl-layout__content">
+
+    <div class="mdl-grid mdl-grid--no-spacing dashboard">
+
+        <div class="mdl-grid mdl-cell mdl-cell--9-col-desktop mdl-cell--12-col-tablet mdl-cell--4-col-phone mdl-cell--top">
+
+            <div class="mdl-cell mdl-cell--8-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+                <div class="mdl-card mdl-shadow--2dp">
+                    <div class="mdl-card__title">
+                        <h1 class="mdl-card__title-text">لیست رزروها</h1>
+                    </div>
+                    <div class="mdl-card__supporting-text no-padding">
+                        <table class="mdl-data-table mdl-js-data-table bordered-table" data-upgraded=",MaterialDataTable">
+                            <thead>
+                            <tr>
+                                <th class="mdl-data-table__cell--non-numeric">نام رزرو کننده</th>
+                                <th class="mdl-data-table__cell--non-numeric">ایمیل</th>
+                                <th class="mdl-data-table__cell--non-numeric">تلفن همراه</th>
+                                <th class="mdl-data-table__cell--non-numeric">تعداد </th>
+                                <th class="mdl-data-table__cell--non-numeric">تاریخ حضور</th>
+                                <th class="mdl-data-table__cell--non-numeric">زمان حضور</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for reserve in reserves %}
+                                <tr>
+                                    <td class="mdl-data-table__cell--non-numeric">{{reserve.name}}</td>
+                                    <td class="mdl-data-table__cell--non-numeric">{{reserve.email}}</td>
+                                    <td class="mdl-data-table__cell--non-numeric">{{reserve.phone}}</td>
+                                    <td class="mdl-data-table__cell--non-numeric">{{reserve.number}}</td>
+                                    <td class="mdl-data-table__cell--non-numeric"><span class="label label--mini background-color--secondary">{{reserve.date}}</span> </td>
+                                    <td class="mdl-data-table__cell--non-numeric">{{reserve.time}}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- Weather widget-->
+            <div class="mdl-cell mdl-cell--3-col-desktop mdl-cell---col-tablet mdl-cell--4-col-phone mdl-cell--top">
+
+                <div class="mdl-card mdl-shadow--2dp">
+                    <div class="mdl-card__title">
+                        <h1 class="mdl-card__title-text">سرآشپز ها</h1>
+                    </div>
+                    <div class="mdl-card__supporting-text">
+                        {% for chef in chefs %}
+                        <li class="mdl-list__item">
+                            <span class="mdl-list__item-primary-content">
+                                <span class="mdl-list__item-avatar background-color--primary">
+                                    <text style="margin-left:8px;">{{ chef.name|make_list|first }}</text>
+                                </span>
+                                <span style="margin-right:10px;">{{chef.name}}</span>
+                            </span>
+                            <span class="mdl-list__item-secondary-content">
+                              <span class="label label--transparent"></span>
+                            </span>
+                        <span class="mdl-menu__item-ripple-container"><span class="mdl-ripple" style="width: 629.388px; height: 629.388px; transform: translate(-50%, -50%) translate(37px, 24px);"></span></span></li>
+                        </li>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="mdl-cell mdl-cell--12-col-desktop mdl-cell--12-col-tablet mdl-cell--4-col-phone">
+                <div class="mdl-card mdl-shadow--2dp">
+                    <div class="mdl-card__title">
+                        <h1 class="mdl-card__title-text myfont">لیست غذاها</h1>
+                    </div>
+                    <div class="mdl-card__supporting-text no-padding">
+                        <table class="mdl-data-table mdl-js-data-table myfont" data-upgraded=",MaterialDataTable">
+                            <thead>
+                                <tr>
+                                    <th class="mdl-data-table__cell--non-numeric">id</th>
+                                    <th class="mdl-data-table__cell--non-numeric">نام غذا</th>
+                                    <th class="mdl-data-table__cell--non-numeric">عکس</th>
+                                    <th class="mdl-data-table__cell--non-numeric">توضیحات</th>
+                                    <th class="mdl-data-table__cell--non-numeric">دسته بندی</th>
+                                    <th class="mdl-data-table__cell--non-numeric">سرآشپز</th>
+                                    <th class="mdl-data-table__cell--non-numeric">قیمت</th>
+                                    <th class="mdl-data-table__cell--non-numeric">امتیاز</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for food in foods %}
+                                    <tr>
+                                        <td class="mdl-data-table__cell--non-numeric">{{food.id}}</td>
+                                        <td class="mdl-data-table__cell--non-numeric"><a href="{% url 'account:food_update' food.pk %}">{{food.name}}</a></td>
+                                        <td class="mdl-data-table__cell--non-numeric"><img src="{{food.thumbnail.url}}" width="130" height="80"></td>
+                                        <td class="mdl-data-table__cell--non-numeric">{{food.description|truncatewords:10}}</td>
+                                        <td class="mdl-data-table__cell--non-numeric">{{food.category_to_str}}</td>
+                                        <td class="mdl-data-table__cell--non-numeric">{{food.chef}}</td>
+                                        <td class="mdl-data-table__cell--non-numeric"><span>{{food.price}} تومان</span></td>
+                                        <td class="mdl-data-table__cell--non-numeric">{% ratings food %}</td>
+                                        <td class="mdl-data-table__cell--non-numeric">
+                                            <span class="label label--mini background-color--primary"><a target="_blank" style="color:black;" href="{% url 'foods:detail' food.id %}" >نمایش در سایت</a></span>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+</div>
+
+{% endblock %}
+
+

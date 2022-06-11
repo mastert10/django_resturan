@@ -1,0 +1,137 @@
+{% extends 'myrest/base.html' %}
+{% load static %}
+
+{% block content %}
+<body>
+	<!-- Start slides -->
+	<div id="slides" class="cover-slides">
+		<ul class="slides-container">
+			<li class="text-center">
+				<img src="{% static 'myrest/images/Fastf.jpg' %}" alt="">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12">
+							<h1 class="m-b-20">به<strong> <br> یامی فود </strong>خوش آمدید</h1>
+							<p class="m-b-40">متنوع ترین و باکیفیت ترین غذاها را با ما تجربه کنید  <br> 
+							</p>
+							<p><a class="btn btn-lg btn-circle btn-outline-new-white" href="#">رزور میز</a></p>
+						</div>
+					</div>
+				</div>
+			</li>
+			<li class="text-center">
+				<img src="{% static 'myrest/images/ta.jpg' %}" alt="">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12">
+							<h1 class="m-b-20">به <strong> <br> یامی فود </strong>خوش آمدید</h1>
+							<p class="m-b-40">متنوع ترین و باکیفیت ترین غذاها را با ما تجربه کنید  <br> 
+							</p>
+							<p><a class="btn btn-lg btn-circle btn-outline-new-white" href="{% url 'reserve:home' %}">رزور میز</a></p>
+						</div>
+					</div>
+				</div>
+			</li>
+			<li class="text-center">
+				<img src="{% static 'myrest/images/RB.jpg' %}" alt="">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12">
+							<h1 class="m-b-20">به<strong> <br> یامی فود </strong>خوش آمدید</h1>
+							<p class="m-b-40">متنوع ترین و باکیفیت ترین غذاها را با ما تجربه کنید  <br> 
+							</p>
+							<p><a class="btn btn-lg btn-circle btn-outline-new-white" href="#">رزور میز</a></p>
+						</div>
+					</div>
+				</div>
+			</li>
+		</ul>
+		<div class="slides-navigation">
+			<a href="#" class="next"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
+			<a href="#" class="prev"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
+		</div>
+	</div>
+	<!-- End slides -->
+	
+	<!-- Start About -->
+	<div class="about-section-box">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 col-md-6 col-sm-12">
+					<img src="{% static 'myrest/images/about-img.jpg' %}" alt="" class="img-fluid">
+				</div>
+				<div class="col-lg-6 col-md-6 col-sm-12 text-center">
+					<div class="inner-column">
+						<h1> به <span> یامی فود </span>خوش آمدید</h1>
+						<h4>یک داستان کوچک</h4>
+						<p>اگر شما یک طراح هستین و یا با طراحی های گرافیکی سروکار دارید به متن های برخورده اید که با نام لورم ایپسوم شناخته می‌شوند.</p>
+						<p>لورم ایپسوم یا طرح‌نما (به انگلیسی: Lorem ipsum) متنی ساختگی و بدون معنی است که برای امتحان فونت و یا پر کردن فضا در یک طراحی گرافیکی و یا صنعت چاپ استفاده میشود.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End About -->
+	
+	<!-- Start QT -->
+	<div class="qt-box qt-background">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 ml-auto mr-auto text-left">
+					<p class="lead ">
+						"اگر شما کسی نیستید که آشپزی می کند، از سرآشپز خودداری کنید و از سرآشپز تعریف کنید."
+					</p>
+					<span class="lead">Michael Strahan</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End QT -->
+	
+	<!-- Start Menu -->
+	<div class="menu-box">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="heading-title text-center">
+						<h2>منو مخصوص</h2>
+						<p></p>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="special-menu text-center">
+						<div class="button-group filter-button-group">
+							<button class="active" data-filter="*">همه</button>
+							<button data-filter=".pitza">پیتزا</button>
+							<button data-filter=".sandwich">ساندویچ</button>
+							<button data-filter=".dessert">دسر</button>
+						</div>
+					</div>
+				</div>
+			</div>
+				
+			<div class="row special-list">
+				{% for food in foods %}
+					<a href="{% url 'foods:detail' food.id %}">
+						<div class="col-lg-4 col-md-6 special-grid {{food.type_food}}">
+							<div class="gallery-single fix">
+								<img src="{{food.thumbnail.url}}" class="img-fluid" alt="Image">
+								<div class="why-text">
+									<h4>{{food.name}}</h4>
+									<h4>{{food.type_food}}</h4>
+									<p>{{food.description}}</p>
+									<h5> {{food.price}}</h5>
+								</div>
+							</div>
+						</div>
+					</a>
+				{% endfor %}
+
+			</div>
+		</div>
+	</div>
+	<!-- End Menu -->
+	
+{% endblock %}	

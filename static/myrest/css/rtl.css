@@ -1,0 +1,51 @@
+@font-face {
+    font-family: 'Sahel' !important;
+    src : url('fonts/Sahel.eot') format('eot');
+    src : url('Sahel.eot?#iefix') format('embedded-opentype'),
+    url('Sahel.woff') format('woff'),
+    url('Sahel.ttf') format('truetype'),
+    url('Sahel.woff2') format('woff2');
+    font-style: normal;
+    font-weight: normal;
+}
+
+.myfont {
+    font-family: 'Sahel' !important;
+}
+
+body {
+    font-family: 'Sahel';
+    direction: rtl;
+    text-align: right;
+    font-family: 'Sahel';
+}
+
+.img-fluid {
+    width: 350px;
+    height: 220px;
+}
+
+.page-breadcrumb {
+    padding: 250px 0 150px;
+    background: url(../images/Mandala.jpg) no-repeat;
+    background-position-x: 0%;
+    background-position-y: 0%;
+    background-attachment: scroll;
+    background-size: auto;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: 0 0;
+    position: relative;
+}
+
+.img {
+    width: 700px;
+    height: 380px;
+}
+
+.logo {
+    width: 180px !important;
+}
+
+
+

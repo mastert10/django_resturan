@@ -1,0 +1,105 @@
+{% extends 'myrest/base.html' %}
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en"><!-- Basic -->
+{% block content %}
+<body>
+	
+	<!-- Start All Pages -->
+	<div class="all-page-title page-breadcrumb">
+		<div class="container text-center">
+			<div class="row">
+				<div class="col-lg-12">
+					<h1>وبلاگ</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End All Pages -->
+	
+	<!-- Start blog -->
+	<div class="blog-box">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="heading-title text-center">
+						<h2>وبلاگ</h2>
+						<p>خوش امدید به بخش مقالات</p>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+					{% for article in articles %}
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="blog-box-inner">
+                            <div class="blog-img-box">
+                                <img class="img-fluid" style="height:350px" src="{{ article.image.url }}" alt="">
+                            </div>
+                            <div class="blog-detail">
+                                <h4>{{article.title}}</h4>
+                                <ul>
+                                    <li><span>{{article.author.get_full_name}}</span></li>
+                                    <li>|</li>
+                                    <li><span>{{article.created}}</span></li>
+                                </ul>
+                                <p>{{article.description}}</p>
+                                <p>{{article.content|truncatewords:46}}</p>
+                                <a class="btn btn-lg btn-circle btn-outline-new-white" href="{% url 'blog:detail' article.slug %}">بیشتر ...</a>
+                            </div>
+                        </div>
+                    </div>
+					{% endfor %}
+            </div>
+		</div>
+	</div>
+
+	<!--paginator-->
+	{% if articles.has_other_pages %}
+	<div class="container mb-2">
+    	<div class="row">
+    		<div class="col d-flex justify-content-center">
+				<nav aria-label="Page navigation example">
+					<ul class="pagination">
+					{% if articles.has_previous %}
+					<li class="page-item"><a class="page-link" href="?page=1">اولین</a></li>
+					<li class="page-item">
+						<a class="page-link" href="?page={{articles.previous_page_number}}" aria-label="Previous">
+							<span aria-hidden="true">&laquo;</span>
+							<span class="sr-only">Previous</span>
+						</a>
+					</li>
+					{% endif %}
+
+					{% for page in articles.paginator.page_range %}
+						{% if articles.number == page %}
+						<li class="page-item active"><a class="page-link" href="?page={{page}}">{{page}}</a></li>
+						{% else %}
+						<li class="page-item"><a class="page-link" href="?page={{page}}">{{page}}</a></li>
+						{% endif %}
+					{% endfor %}
+
+					  {% if articles.has_next %}
+					  <li class="page-item">
+						  <a class="page-link" href="?page={{articles.next_page_number}}" aria-label="Next">
+							  <span aria-hidden="true">&raquo;</span>
+							  <span class="sr-only">Next</span>
+							</a>
+						</li>
+						<li class="page-item"><a class="page-link" href="?page={{articles.paginator.num_pages}}">اخرین</a></li>
+						{% endif %}
+					</ul>
+				  </nav>
+			</div>
+		</div>
+	</div>
+	{% endif %}
+
+
+	<!-- End blog -->
+    <br>
+</body>
+</html>
+{% endblock %}
+

@@ -1,0 +1,54 @@
+{% extends 'registration/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}افزودن غذا | {{user.get_full_name}}{% endblock %}
+
+{% block main %}
+<main class="mdl-layout__content">
+    <div class="mdl-cell mdl-cell--3-col-desktop mdl-cell--10-col-tablet mdl-cell--2-col-phone buttons-basic">
+        <div class="mdl-card mdl-shadow--2dp">
+            <div class="mdl-card__title">
+                <h2 class="mdl-card__title-text">افزودن غذا</h2>
+            </div>
+            <div class="mdl-card__supporting-text">
+                <form method='post' enctype="multipart/form-data">{% csrf_token %}
+                <div class="form-row">
+                    <div class="form-group col-md-6 mb-0">
+                        {{ form.name|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-2 mb-0">
+                        {{ form.chef|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-8 mb-0">
+                        {{ form.description|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-4 mb-0">
+                    </div>
+                    <div class="form-group col-md-6 mb-0">
+                        {{ form.price|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-4 mb-0">
+                        {{ form.thumbnail|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-6 mb-0">
+                        {{ form.pub_date|as_crispy_field }}
+                        {{ form.time|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-2 mb-0">
+                        {{ form.category|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-6 mb-0">
+                        {{ form.type_food|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-4 mb-0">
+                        {{ form.rate|as_crispy_field }}
+                    </div>
+                </div>
+                <button class="btn btn-success">افزودن غذا</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
+
